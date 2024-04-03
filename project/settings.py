@@ -48,6 +48,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 CORS_ALLOW_ALL_ORIGINS = True
 
+ALLOWED_HOSTS = ['meggieapi.onrender.com', 'localhost']
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
