@@ -39,8 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main_app.apps.MainAppConfig',
+    'users',
     'rest_framework',
     'corsheaders',
+    'rest_framework.authtoken',
+    'djoser',
 ]
 
 MEDIA_URL = '/media/'
@@ -62,7 +65,29 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
+DJOSER = {
+    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': '#/activate/{uid}/{token}',
+    'SEND_ACTIVATION_EMAIL': True,
+    'SERIALIZERS': {},
+    'USER_CREATE_PASSWORD_RETYPE' : True,
+    'SEND_CONFIRMATION_EMAIL':True,
+    # 'LOGIN_FIELD':'email'
+}
+
+
 ROOT_URLCONF = 'project.urls'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
 
 TEMPLATES = [
     {
@@ -134,3 +159,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# email config
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_HOST_USER = 'e98f9248f8b1d5'
+EMAIL_HOST_PASSWORD = '5b9fc534e796d1'
+EMAIL_PORT = '2525'
+DEFAULT_FROM_EMAIL = 'support@gmail.com'
+DOMAIN = 'localhost:8000'
